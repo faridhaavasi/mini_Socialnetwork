@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # my pps
     'home.apps.HomeConfig',
+    'account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
