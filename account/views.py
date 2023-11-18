@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.models import User
+from django.contrib.auth import login
 from .forms import UserRegisterForm
 # Create your views here.
 
@@ -17,7 +18,7 @@ class UserRegisterView(View):
 
         if form.is_valid():
             cd = form.cleaned_data
-            User.objects.create_user(cd['username'], cd['email'], cd['password'])
+            user = User.objects.create_user(cd['username'], cd['email'], cd['password'])
+            login(request, user)
             return redirect('/')
-        
         return render(request, self.temlpate_name, {'form': form})
