@@ -49,10 +49,10 @@ class LoginUserView(View):
         return render(request, self.template_name, {'form': form})
 
 
-def UserLogoutView(request):
-    
-    logout(request)
-    return redirect('/')    
+class UserLogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect('/')    
             
         
             
