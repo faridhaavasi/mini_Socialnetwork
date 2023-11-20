@@ -5,4 +5,4 @@ from django.http import HttpResponse
 
 class HomeIndex(View):
     def get(self, request):
-        return render(request, 'home/index.html')
+        return render(request, 'home/index.html', {'requust': request})
