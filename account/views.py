@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
+from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm
 # Create your views here.
 
@@ -10,6 +11,7 @@ class UserRegisterView(View):
     temlpate_name = 'account/register.html'
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
+            messages.error(request, message='you are logined')
             return redirect('/')
         return super().dispatch(request, *args, **kwargs)
     
@@ -24,6 +26,7 @@ class UserRegisterView(View):
             cd = form.cleaned_data
             user = User.objects.create_user(cd['username'], cd['email'], cd['password'])
             login(request, user)
+            messages.success(request, 'login')
             return redirect('/')
         return render(request, self.temlpate_name, {'form': form})
 
@@ -45,6 +48,7 @@ class LoginUserView(View):
             cd = form.cleaned_data
             user = authenticate(username=cd['username'], password=cd['password'])
             login(request, user)
+            messages.success(request, 'login succesfuly')
             return redirect('/')
         return render(request, self.template_name, {'form': form})
 
@@ -52,6 +56,7 @@ class LoginUserView(View):
 class UserLogoutView(View):
     def get(self, request):
         logout(request)
+        messages.success(request, 'loguot succsful')
         return redirect('/')    
             
         
