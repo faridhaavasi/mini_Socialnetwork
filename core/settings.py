@@ -103,6 +103,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+#auth
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'account.auth.EmailBackend',
+]
+
+LOGIN_URL = '/account/login/'
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
