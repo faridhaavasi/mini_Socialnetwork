@@ -4,6 +4,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .serializers import Registerserializer
+from rest_framework.serializers import ValidationError
 # Create your views here.
 
 class UserRegisterView(View):
@@ -30,6 +34,22 @@ class UserRegisterView(View):
             return redirect('/')
         return render(request, self.temlpate_name, {'form': form})
 
+class RegisterApiview(APIView):
+    serializer_class = Registerserializer
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+
+            vd = serializer.validated_data
+            if vd['password'] != vd['repeat_password']:
+                raise ValidationError('password and repeat_password is not match')
+
+            user = User(username=vd['username'], email=vd['email'])
+            user.set_password(vd['password'])
+            user.save()
+            return Response({'massage': 'Registered'})
+        return Response(serializer.errors)
+
 class LoginUserView(View):
     form_class = UserLoginForm
     template_name = 'account/login.html'
@@ -52,6 +72,9 @@ class LoginUserView(View):
             return redirect('/')
         return render(request, self.template_name, {'form': form})
 
+class LoginApiview(APIView):
+    pass
+
 
 class UserLogoutView(View):
     def get(self, request):
@@ -59,7 +82,9 @@ class UserLogoutView(View):
         messages.success(request, 'loguot succsful')
         return redirect('/')    
             
-        
+class LogoutApiview(APIView):
+    pass
+
             
         
     
