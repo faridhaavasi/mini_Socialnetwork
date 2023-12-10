@@ -49,6 +49,7 @@ class RegisterApiview(APIView):
             user = User(username=vd['username'], email=vd['email'])
             user.set_password(vd['password'])
             user.save()
+            login(request, user)
             return Response({'massage': 'Registered'})
         return Response(serializer.errors)
 
@@ -74,8 +75,7 @@ class LoginUserView(View):
             return redirect('/')
         return render(request, self.template_name, {'form': form})
 
-class LoginApiview(APIView):
-    pass
+
 
 
 class UserLogoutView(View):
