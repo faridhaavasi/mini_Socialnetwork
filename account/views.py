@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from .serializers import Registerserializer
 from rest_framework.serializers import ValidationError
 # Create your views here.
