@@ -1,0 +1,10 @@
+{% extends 'include/base.html' %}
+
+{% block content %}
+    <form class="align-content-center" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+    <button class="submit-row">submit</button>
+    </form>
+{% endblock content %}
