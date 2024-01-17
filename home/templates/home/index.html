@@ -2,5 +2,13 @@
 
 {% block content %}
     {% include 'include/message.html' %}
-    <h3> index </h3>
+    <h3> home page </h3>
+
+    {% if request.user.is_authenticated %}
+        <center>
+    <h4 class="alert-dark" > mini welcome </h4>
+    {% else %}
+    <a class="submit-row" href="{% url 'accounts:register' %}"> register </a>
+    {% endif %}
+
 {% endblock content %}
