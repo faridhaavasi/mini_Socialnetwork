@@ -10,10 +10,10 @@
                                         href="{% url 'home:home' %}">Home</a></li>
                 <br>
                 {% if request.user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home:home' %}">logout</a>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'accounts:logout' %}">logout</a>
                     </li>
                 {% else %}
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'accounts:login' %}">loin</a>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'accounts:login' %}">login</a>
                     </li>
                 {% endif %}
             </ul>

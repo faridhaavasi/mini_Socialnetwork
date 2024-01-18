@@ -3,7 +3,7 @@ from django.views import View
 from django.contrib import messages
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 class RegisterView(View):
     form_class = RegisterForm
     template = 'accounts/register.html'
@@ -36,3 +36,11 @@ class LoginView(View):
             messages.success(request, 'you are logined', 'success')
             return redirect('home:home')
         return render(request, self.template, {'form': form})
+
+
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        messages.success(request, 'you are logouted', 'success')
+        return redirect('home:home')
