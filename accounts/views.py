@@ -31,7 +31,7 @@ class LoginView(View):
         form = self.form_class(data=request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            user = authenticate(User,username=cd['username'], password=cd['password'])
+            user = authenticate(request,username=cd['username'], password=cd['password'])
             login(request, user)
             messages.success(request, 'you are logined', 'success')
             return redirect('home:home')
