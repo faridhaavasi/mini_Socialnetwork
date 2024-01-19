@@ -21,7 +21,7 @@ class RegisterForm(forms.Form):
         password2 = cleaned_data.get('password2')
         if password and password2:
             if password != password:
-                self.add_error('password2','passoerd is not match')
+                raise ValidationError('password no match')
 
     def clean_username(self):
         username = self.cleaned_data['username']
