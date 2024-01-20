@@ -49,9 +49,10 @@ class LoginForm(forms.Form):
     def clean(self):
         cleaned_data = super().clean()
         username = User.objects.filter(username=cleaned_data.get('username')).exists()
-        email = User.objects.filter(email=cleaned_data.get('username')).exists()
-        if username == False or email == False:
+
+        if username is not True:
             raise ValidationError('username or email is not valid')
+
 
 
 

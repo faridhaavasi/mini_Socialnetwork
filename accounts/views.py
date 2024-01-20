@@ -7,6 +7,12 @@ from django.contrib.auth import authenticate, login, logout
 class RegisterView(View):
     form_class = RegisterForm
     template = 'accounts/register.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+        if user.is_authenticated:
+            return redirect('home:home')
+        return super().dispatch(request, *args, **kwargs)
     def get(self, request):
         form = self.form_class()
         return render(request, self.template, {'form': form})
@@ -23,6 +29,12 @@ class RegisterView(View):
 class LoginView(View):
     form_class = LoginForm
     template = 'accounts/login.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+        if user.is_authenticated:
+            return redirect('home:home')
+        return super().dispatch(request, *args, **kwargs)
     def get(self, request):
         form = self.form_class()
         return render(request, self.template, {'form': form})
@@ -40,6 +52,7 @@ class LoginView(View):
 
 
 class LogoutView(View):
+    
     def get(self, request):
         logout(request)
         messages.success(request, 'you are logouted', 'success')
