@@ -46,5 +46,13 @@ class LoginForm(forms.Form):
         attrs={'class': 'form-control',
                'placeholder': 'enter your password'})
     )
+    def clean(self):
+        cleaned_data = super().clean()
+        username = User.objects.filter(username=cleaned_data.get('username')).exists()
+        email = User.objects.filter(email=cleaned_data.get('username')).exists()
+        if username == False or email == False:
+            raise ValidationError('username or email is not valid')
+
+
 
 
