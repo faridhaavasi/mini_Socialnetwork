@@ -4,7 +4,7 @@
     <h5>{{ user.username }}</h5>
     <center>
         {% for post in posts %}
-            <h6><a href="#">{{ post.title }}</a></h6>
+            <h6><a href="{{post.get_absolut_url}}">{{ post.title }}</a></h6>
         {% endfor %}
     </center>
 

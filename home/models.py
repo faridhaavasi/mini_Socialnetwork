@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from django.urls import reverse
 
 # Create your models here.
 class Post(models.Model):
@@ -15,6 +16,10 @@ class Post(models.Model):
              update_fields=None):
         self.slug = slugify(self.title)
         super().save()
+
+    def get_absolut_url(self):
+        return reverse('home:detailpost', args=[self.pk, self.slug])
+
 
     def __str__(self):
         return f'{self.title} - {self.user.username}'

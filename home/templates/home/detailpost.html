@@ -1,0 +1,9 @@
+{% extends 'include/base.html' %}
+{% block content %}
+    <center>
+        <h6>user :{{ post.user.username }}</h6>
+        <h6>title: {{ post.title }}</h6>
+        <p>{{ post.body }}</p>
+
+    </center>
+{% endblock content %}
