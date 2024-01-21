@@ -11,6 +11,7 @@
                 <br>
                 {% if request.user.is_authenticated %}
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'accounts:logout' %}">logout</a>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'accounts:selfprofile' %}">your profile</a>
                     </li>
                 {% else %}
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'accounts:login' %}">login</a>

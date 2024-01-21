@@ -4,6 +4,7 @@ from django.contrib import messages
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from home.models import Post
 class RegisterView(View):
     form_class = RegisterForm
     template = 'accounts/register.html'
@@ -57,3 +58,12 @@ class LogoutView(View):
         logout(request)
         messages.success(request, 'you are logouted', 'success')
         return redirect('home:home')
+
+
+
+class SelfProfileUserView(View):
+    template = 'accounts/selfprofile.html'
+    def get(self, request):
+        user = request.user
+        posts = Post.objects.filter(user=user.id)
+        return render(request, self.template, {'user': user, 'posts': posts})
