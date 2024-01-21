@@ -2,10 +2,10 @@
 {% block content %}
 
     <h5>{{ user.username }}</h5>
-    <center>
+    <a href="#"> <button class="btn btn-primary"> add post </button></a>
         {% for post in posts %}
             <h6><a href="{{post.get_absolut_url}}">{{ post.title }}</a></h6>
         {% endfor %}
-    </center>
+
 
 {% endblock content %}

@@ -1,9 +1,12 @@
 {% extends 'include/base.html' %}
 {% block content %}
-    <center>
-        <h6>user :{{ post.user.username }}</h6>
-        <h6>title: {{ post.title }}</h6>
-        <p>{{ post.body }}</p>
 
-    </center>
+    <a href="#">
+        <button class="btn btn-danger">delete</button>
+        <button class="btn btn-info">update</button>
+    </a>
+    <h6>user :{{ post.user.username }}</h6>
+    <h6>title: {{ post.title }}</h6>
+    <p>{{ post.body }}</p>
+
 {% endblock content %}
