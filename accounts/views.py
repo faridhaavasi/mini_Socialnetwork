@@ -5,6 +5,7 @@ from .forms import RegisterForm, LoginForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from home.models import Post
+from django.contrib.auth.mixins import LoginRequiredMixin
 class RegisterView(View):
     form_class = RegisterForm
     template = 'accounts/register.html'
@@ -52,7 +53,7 @@ class LoginView(View):
 
 
 
-class LogoutView(View):
+class LogoutView(LoginRequiredMixin,View):
     
     def get(self, request):
         logout(request)

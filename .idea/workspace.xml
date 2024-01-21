@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fe4c6241-bcd4-446b-a9cb-f2624803758d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/selfprofile.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/selfprofile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/detailpost.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/detailpost.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +97,7 @@
       <workItem from="1705740410305" duration="5345000" />
       <workItem from="1705832997153" duration="2497000" />
       <workItem from="1705843032618" duration="4276000" />
-      <workItem from="1705868167992" duration="878000" />
+      <workItem from="1705868167992" duration="1682000" />
     </task>
     <servers />
   </component>
@@ -107,8 +105,18 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="49325b82-6371-4dc1-97d6-3ddbcb63968e" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
+        <entry key="49325b82-6371-4dc1-97d6-3ddbcb63968e">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
