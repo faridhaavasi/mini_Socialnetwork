@@ -2,11 +2,16 @@
 
 {% block content %}
     {% include 'include/message.html' %}
-    <h3> home page </h3>
+    <h3> users of mini </h3>
+    {% if request.user.is_authenticated %}
+        {% for user in users %}
+            <a class="page-item" href="{% url 'home:profiles' user.id %}"> {{ user.username }}</a>
+            <br>
+        {% endfor %}
+    {% endif %}
 
     {% if request.user.is_authenticated %}
         <center>
-    <h4 class="alert-dark" > mini welcome </h4>
     {% else %}
     <a class="submit-row" href="{% url 'accounts:register' %}"> register </a>
     {% endif %}

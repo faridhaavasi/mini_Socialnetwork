@@ -3,11 +3,21 @@ from django.views import View
 from .models import Post
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import AddUpdatePostUserForm
+from django.contrib.auth.models import User
 from django.contrib import messages
 
 class HomeView(View):
     def get(self, request):
-        return render(request, 'home/index.html', {})
+        users = User.objects.all()
+        return render(request, 'home/index.html', {'users': users})
+
+class UserProfile(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        user = User.objects.get(pk=pk)
+        posts = Post.objects.filter(user=user.id)
+        return render(request, 'home/userprofile.html', {'user': user, 'posts': posts})
+
+
 
 class DetailPostView(LoginRequiredMixin,View):
 

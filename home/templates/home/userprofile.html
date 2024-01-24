@@ -1,0 +1,10 @@
+{% extends 'include/base.html' %}
+{% block content %}
+    <h6> username:{{ user.username }}</h6>
+    {% for post in posts %}
+        <a href="{% url 'home:detailpost' post.id  post.slug %}">{{ post.title }}</a>
+        <br>
+    {% endfor %}
+
+
+{% endblock content %}
