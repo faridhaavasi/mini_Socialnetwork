@@ -131,3 +131,11 @@ AUTHENTICATION_BACKENDS = [
     "accounts.authentication.EmaliAuthentication",
 ]
 
+#Google account
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'faridhavasi777gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_PASSWORD = 'tsebujylxwgbbpmg'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'mini_socialnetwork'
