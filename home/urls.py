@@ -9,4 +9,6 @@ urlpatterns = [
     path('update/<int:pk>',views.UpdatePostUserView.as_view(), name='update'),
     path('delete/<int:pk>/<slug:slug>',views.DetailPostView.as_view(), name='delete'),
     path('profiles/<int:pk>', views.UserProfile.as_view(), name='profiles'),
+    path('folow/<int:pk>', views.FolowingUserView.as_view(), name='follow'),
+    path('unfolow/<int:pk>', views.UnfollowUserView.as_view(), name='unfollow'),
 ]

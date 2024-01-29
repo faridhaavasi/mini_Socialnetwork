@@ -1,5 +1,11 @@
 {% extends 'include/base.html' %}
 {% block content %}
+{% if request.user.id != user.id and not is_following %}
+    <a href="{% url 'home:follow' user.id %}"> follow </a>
+{% elif request.user.id != user.id and  is_following %}
+    <a href="{% url 'home:unfollow' user.id %}">unfollow</a>
+    {% endif %}
+
     <h6> username:{{ user.username }}</h6>
     {% for post in posts %}
         <a href="{% url 'home:detailpost' post.id  post.slug %}">{{ post.title }}</a>

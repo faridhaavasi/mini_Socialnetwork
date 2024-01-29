@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from .models import Post
+from accounts.models import RelationInstance
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import AddUpdatePostUserForm
 from django.contrib.auth.models import User
@@ -13,9 +14,13 @@ class HomeView(View):
 
 class UserProfile(LoginRequiredMixin, View):
     def get(self, request, pk):
+        is_following = False
         user = User.objects.get(pk=pk)
+        relation = RelationInstance.objects.filter(from_user=request.user, to_user=user)
+        if relation.exists():
+            is_following=True
         posts = Post.objects.filter(user=user.id)
-        return render(request, 'home/userprofile.html', {'user': user, 'posts': posts})
+        return render(request, 'home/userprofile.html', {'user': user, 'posts': posts, 'is_following': is_following})
 
 
 
@@ -71,6 +76,32 @@ class DeletePostUserView(LoginRequiredMixin, View):
         else:
             messages.error(request, 'you are con not delete post', 'danger')
         return redirect('home:home')
+
+
+
+class FolowingUserView(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        user = User.objects.get(pk=pk)
+        relation = RelationInstance.objects.filter(from_user=request.user, to_user=user)
+        if relation.exists():
+            messages.error(request, 'you are not con following', 'danger')
+            return redirect('home:profiles' , user.id)
+        else:
+            RelationInstance.objects.create(from_user=request.user, to_user=user)
+            messages.success(request, 'follow','success')
+            return redirect('home:profiles', user.id)
+
+
+class UnfollowUserView(View):
+    def get(self, request, pk):
+        user = User.objects.get(pk=pk)
+        relation = RelationInstance.objects.filter(from_user=request.user, to_user=user)
+        if relation.exists():
+            relation.delete()
+            messages.success(request, 'unfollow', 'success')
+        else:
+            messages.error(request, 'you are not follow', 'danger')
+        return redirect('home:profiles', user.id)
 
 
 
