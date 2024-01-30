@@ -1,12 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .models import Post
+from .models import Post, Comment
 from accounts.models import RelationInstance
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import AddUpdatePostUserForm
 from django.contrib.auth.models import User
 from django.contrib import messages
-
 class HomeView(View):
     def get(self, request):
         users = User.objects.all()
@@ -28,7 +27,18 @@ class DetailPostView(LoginRequiredMixin,View):
 
     def get(self, request, pk, slug):
         post = Post.objects.get(pk=pk, slug=slug)
-        return render(request, 'home/detailpost.html', {'post': post})
+        commens = post.comments.all()
+        return render(request, 'home/detailpost.html', {'post': post, 'comments': commens})
+
+    def post(self, request, pk, slug):
+        post = Post.objects.get(pk=pk, slug=slug)
+        Comment.objects.create(user=request.user, post=post, body=request.POST['body'])
+        return redirect('home:home')
+
+
+
+
+
 
 
 
@@ -102,6 +112,9 @@ class UnfollowUserView(View):
         else:
             messages.error(request, 'you are not follow', 'danger')
         return redirect('home:profiles', user.id)
+
+
+
 
 
 

@@ -6,5 +6,19 @@
     <h6>user :{{ post.user.username }}</h6>
     <h6>title: {{ post.title }}</h6>
     <p>{{ post.body }}</p>
+    <h6> comments:</h6>
+    {% for comment in comments %}
+        <a href="{% url 'home:profiles' comment.user.id %}"> comments by {{ comment.user }}</a>
+
+        <p> {{ comment.body }}</p>
+        <br>
+    {% endfor %}
+<form method="post">
+{% csrf_token %}
+  <textarea id="bodey" name="body" rows="4" cols="50" placeholder="body ..."></textarea>
+  <br>
+  <input type="submit" value="Submit">
+</form>
+
 
 {% endblock content %}
