@@ -36,6 +36,17 @@ class Comment(models.Model):
 
 
 
+class ReplayComments(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='replays')
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replays')
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'replay comment : {self.comment} in user {self.user}'
+
+
+
 
 
 
