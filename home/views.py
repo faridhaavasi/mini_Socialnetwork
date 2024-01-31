@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .models import Post, Comment
+from .models import Post, Comment, ReplayComments
 from accounts.models import RelationInstance
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import AddUpdatePostUserForm
@@ -115,6 +115,21 @@ class UnfollowUserView(View):
 
 
 
+
+
+
+class AddReplayView(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        comment = Comment.objects.get(pk=pk)
+
+        return render(request, 'home/replay.html', {'comment': comment})
+    def post(self, request, pk):
+        comment = Comment.objects.get(pk=pk)
+        if request.POST.get('body') is not None:
+            ReplayComments.objects.create(user=request.user, comment=comment, body=request.POST['body'])
+            messages.success(request, 'add replay', 'success')
+            return redirect('home:home')
+        return render(request, 'home/replay.html', {'comment': comment})
 
 
 

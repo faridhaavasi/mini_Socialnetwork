@@ -9,9 +9,17 @@
     <h6> comments:</h6>
     {% for comment in comments %}
         <a href="{% url 'home:profiles' comment.user.id %}"> comments by {{ comment.user }}</a>
+        <br>
+        <a class="btn-dark" href="{% url 'home:replay' comment.id %}"> replay </a>
 
         <p> {{ comment.body }}</p>
         <br>
+        {% if comment.replays %}
+            {% for replay in comment.replays.all %}
+                <h6> user: {{ replay.user }} </h6>
+                <p> {{ replay.body }} </p>
+            {% endfor %}
+        {% endif %}
     {% endfor %}
 <form method="post">
 {% csrf_token %}

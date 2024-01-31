@@ -11,4 +11,5 @@ urlpatterns = [
     path('profiles/<int:pk>', views.UserProfile.as_view(), name='profiles'),
     path('folow/<int:pk>', views.FolowingUserView.as_view(), name='follow'),
     path('unfolow/<int:pk>', views.UnfollowUserView.as_view(), name='unfollow'),
+    path('replaycomment/<int:pk>', views.AddReplayView.as_view(), name='replay'),
 ]
